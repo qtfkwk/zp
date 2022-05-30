@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::{BufReader, Read};
+use std::path::Path;
 
 // Field enum
 
@@ -545,6 +546,22 @@ where
     Ok(s)
 }
 
+/// Process a zip file at path
+fn process_file(path: &str, verbose: bool) -> Result<String, String> {
+    if !Path::new(path).exists() {
+        return Err(format!("No such file or directory (os error 2): {:?}", path));
+    } else if !Path::new(path).is_file() {
+        return Err(format!("Path is not a file: {:?}", path));
+    }
+    match File::open(path) {
+        Ok(f) => {
+            let mut r = BufReader::new(f);
+            process(&mut r, verbose)
+        }
+        Err(e) => Err(format!("{e}: {:?}", path)),
+    }
+}
+
 // Tests
 
 #[cfg(test)]
@@ -709,7 +726,31 @@ mod tests {
         let mut r = BufReader::new(f);
         assert_eq!(
             process(&mut r, true).unwrap(),
-            include_str!("../../exercise.zip-process-verbose.txt")
+            include_str!("../../exercise.zip-process-verbose.txt"),
+        );
+    }
+
+    #[test]
+    fn process_file_nonexistent_test() {
+        assert_eq!(
+            process_file("../../nonexistent.zip", true).unwrap_err(),
+            String::from("No such file or directory (os error 2): \"../../nonexistent.zip\""),
+        );
+    }
+
+    #[test]
+    fn process_file_not_file_test() {
+        assert_eq!(
+            process_file(".", true).unwrap_err(),
+            String::from("Path is not a file: \".\""),
+        );
+    }
+
+    #[test]
+    fn process_file_test() {
+        assert_eq!(
+            process_file("../../exercise.zip", true).unwrap(),
+            include_str!("../../exercise.zip-process-verbose.txt"),
         );
     }
 }
