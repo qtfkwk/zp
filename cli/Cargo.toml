@@ -1,0 +1,15 @@
+[package]
+name = "zp-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "3.1.18", features = ["derive"] }
+zp-lib = { version = "0.1.0", path = "../lib" }
+
+[[bin]]
+name = "zp"
+path = "src/main.rs"
+
+[dev-dependencies]
+assert_cmd = "2.0.4"

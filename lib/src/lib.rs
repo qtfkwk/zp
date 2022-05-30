@@ -571,7 +571,7 @@ where
 }
 
 /// Process a zip file at path
-fn process_file(path: &str, verbose: bool) -> Result<String, String> {
+pub fn process_file(path: &str, verbose: bool) -> Result<String, String> {
     if !Path::new(path).exists() {
         return Err(format!("No such file or directory (os error 2): {:?}", path));
     } else if !Path::new(path).is_file() {
