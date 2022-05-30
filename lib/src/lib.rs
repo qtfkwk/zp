@@ -156,6 +156,11 @@ where
 // Process functions
 
 /// Process the raw bytes of a zip file
+///
+/// If `verbose` is true: returns a complete analysis of the zip file contents.
+///
+/// If `verbose` is false: return a summary of the the zip file contents (file name, whether item
+/// is a folder, uncompressed size, modified date/time, and comment).
 fn process<R>(r: &mut BufReader<R>, verbose: bool) -> Result<String, String>
 where
     R: Read,
@@ -462,6 +467,25 @@ where
                         ));
                     }
 
+                    // Summary
+                    if !verbose {
+                        s.push(format!(
+                            "\
+{}\t{}\t{uncompressed_size}\t{:04}-{:02}-{:02}T{:02}:{:02}:{:02}\t{}
+\
+                            ",
+                            std::str::from_utf8(&file_name).unwrap(),
+                            file_name.ends_with(b"/"),
+                            mod_date.0,
+                            mod_date.1,
+                            mod_date.2,
+                            mod_time.0,
+                            mod_time.1,
+                            mod_time.2,
+                            std::str::from_utf8(&file_comment).unwrap(),
+                        ));
+                    }
+
                 // End of central directory record
                 } else if sig == 0x504b0506 {
                     if verbose {
@@ -731,6 +755,16 @@ mod tests {
     }
 
     #[test]
+    fn process_summary_test() {
+        let f = File::open("../../exercise.zip").unwrap();
+        let mut r = BufReader::new(f);
+        assert_eq!(
+            process(&mut r, false).unwrap(),
+            include_str!("../../exercise.zip-process-summary.txt"),
+        );
+    }
+
+    #[test]
     fn process_file_nonexistent_test() {
         assert_eq!(
             process_file("../../nonexistent.zip", true).unwrap_err(),
@@ -751,6 +785,14 @@ mod tests {
         assert_eq!(
             process_file("../../exercise.zip", true).unwrap(),
             include_str!("../../exercise.zip-process-verbose.txt"),
+        );
+    }
+
+    #[test]
+    fn process_file_summary_test() {
+        assert_eq!(
+            process_file("../../exercise.zip", false).unwrap(),
+            include_str!("../../exercise.zip-process-summary.txt"),
         );
     }
 }
