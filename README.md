@@ -79,7 +79,7 @@ The top candidates looked like:
 Unfortunately, I haven't used these enough to leverage them for this project.
 I made an attempt using binread, but ran into an issue where it was erroring at the end of the input
 file instead of just stopping parsing
-(reported via [binread#36](https://github.com/jam1garner/binread/issues/47)).
+(reported via [binread#47](https://github.com/jam1garner/binread/issues/47)).
 It has a very clean design and approach, but seems to have fewer users / support / etc than either
 nom or pest.
 
