@@ -69,8 +69,7 @@ Please visit <https://rustup.rs/> for instructions on installing Rust on your sy
 This crate should be functional across Windows, macOS, and Linux; but it has only been tested on
 Debian Linux 11 so far.
 
-During initial research to solve this problem revealed several other crates that might be better in
-the long term.
+Initial research revealed several other crates that might be better in the long term.
 The top candidates looked like:
 
 * [binread](https://crates.io/crates/binread)
@@ -79,7 +78,8 @@ The top candidates looked like:
 
 Unfortunately, I haven't used these enough to leverage them for this project.
 I made an attempt using binread, but ran into an issue where it was erroring at the end of the input
-file instead of just stopping parsing.
+file instead of just stopping parsing
+(reported via [binread#36](https://github.com/jam1garner/binread/issues/47)).
 It has a very clean design and approach, but seems to have fewer users / support / etc than either
 nom or pest.
 
