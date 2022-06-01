@@ -72,16 +72,21 @@ Debian Linux 11 so far.
 Initial research revealed several other crates that might be better in the long term.
 The top candidates looked like:
 
-* [binread](https://crates.io/crates/binread)
+* [binrw](https://crates.io/crates/binrw)
 * [nom](https://crates.io/crates/nom)
 * [pest](https://crates.io/crates/pest)
 
 Unfortunately, I haven't used these enough to leverage them for this project.
-I made an attempt using binread, but ran into an issue where it was erroring at the end of the input
-file instead of just stopping parsing
-(reported via [binread#47](https://github.com/jam1garner/binread/issues/47)).
+I made an attempt using binrw, but ran into an issue where it was erroring at the end of the input
+file instead of just stopping parsing (reported via
+[binrw#125](https://github.com/jam1garner/binrw/issues/125)).
 It has a very clean design and approach, but seems to have fewer users / support / etc than either
 nom or pest.
+A committer (Colin Snover) gave a hint at the root cause, so I implemented it, confirmed it fixed
+the issue in the [proof-of-concept](https://github.com/qtfkwk/br-eof-poc) and in my binrw-based
+version of zp, and created a [pull request](https://github.com/jam1garner/binrw/pull/126) to get the
+fix in binrw.
+Planning a major update to this repository to use binrw as the underlying framework.
 
 The result is a straightforward approach in Rust.
 Code is organized in a single git repository / workspace with a library crate and a command line
