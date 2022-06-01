@@ -75,6 +75,7 @@ The top candidates looked like:
 * [binrw](https://crates.io/crates/binrw)
 * [nom](https://crates.io/crates/nom)
 * [pest](https://crates.io/crates/pest)
+* [serde](https://crates.io/crates/serde)
 
 Unfortunately, I haven't used these enough to leverage them for this project.
 I made an attempt using binrw, but ran into an issue where it was erroring at the end of the input
