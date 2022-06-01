@@ -1,7 +1,8 @@
 [package]
 name = "zp-lib"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [dependencies]
+binrw = { git = "https://github.com/qtfkwk/binrw", branch = "125" }
 hex = "0.4.3"

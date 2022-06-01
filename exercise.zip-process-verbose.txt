@@ -488,6 +488,7 @@ total_entries = 0x000d (13)
 cd_size = 0x00000587 (1415)
 cd_offset = 0x0000079e (1950)
 comment_length = 0x0000 (0)
+zip_file_comment = "" ("")
 ---
 EOF
 ---

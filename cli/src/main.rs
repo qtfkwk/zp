@@ -15,7 +15,9 @@ struct Args {
 fn main() -> Result<(), String> {
     let args = Args::parse();
     if args.files.len() < 1 {
-        return Err(String::from("No files provided. Run with `-h` to view usage."));
+        return Err(String::from(
+            "No files provided. Run with `-h` to view usage.",
+        ));
     }
     let verbose = args.verbose > 0;
     for i in args.files {

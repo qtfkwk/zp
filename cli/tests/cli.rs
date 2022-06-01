@@ -70,17 +70,27 @@ fn summary() {
 
 #[test]
 fn not_a_file() {
-    fail("zp", &["."], 1, "Path is not a file: \".\"");
+    fail("zp", &["."], 1, "Path is not a file: `.`");
 }
 
 #[test]
 fn no_files() {
-    fail("zp", &[], 1, "No files provided. Run with `-h` to view usage.");
+    fail(
+        "zp",
+        &[],
+        1,
+        "No files provided. Run with `-h` to view usage.",
+    );
 }
 
 #[test]
 fn no_files_verbose() {
-    fail("zp", &["-v"], 1, "No files provided. Run with `-h` to view usage.");
+    fail(
+        "zp",
+        &["-v"],
+        1,
+        "No files provided. Run with `-h` to view usage.",
+    );
 }
 
 #[test]
@@ -89,6 +99,6 @@ fn eof() {
         "zp",
         &["nonexistent.zip"],
         1,
-        "No such file or directory (os error 2): \"nonexistent.zip\"",
+        "Path does not exist: `nonexistent.zip`",
     );
 }
