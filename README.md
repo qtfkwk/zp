@@ -167,7 +167,7 @@ cargo install --path cli
 
 ```text
 $ zp -h
-zp 0.2.0
+zp 0.2.1
 Zip Parser
 
 USAGE:

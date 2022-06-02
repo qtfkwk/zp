@@ -60,12 +60,12 @@ fn version() {
 
 #[test]
 fn verbose() {
-    pass("zp", &["-v", "../../exercise.zip"], VERBOSE);
+    pass("zp", &["-v", "../exercise.zip"], VERBOSE);
 }
 
 #[test]
 fn summary() {
-    pass("zp", &["../../exercise.zip"], SUMMARY);
+    pass("zp", &["../exercise.zip"], SUMMARY);
 }
 
 #[test]
