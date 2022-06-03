@@ -1,11 +1,13 @@
 use crate::*;
 
+/// Zip file
 #[derive(BinRead, Debug)]
 pub struct Entries {
     #[br(parse_with = until_eof)]
     pub list: Vec<Entry>,
 }
 
+/// Zip file entry
 #[derive(BinRead, Debug)]
 pub enum Entry {
     LocalFile(LocalFile),
@@ -13,6 +15,7 @@ pub enum Entry {
     EndOfCentralDirectoryRecord(EndOfCentralDirectoryRecord),
 }
 
+/// Local file header, file data, and data descriptor
 #[derive(BinRead, Debug)]
 #[br(magic = b"\x50\x4b\x03\x04")]
 pub struct LocalFile {
@@ -40,6 +43,7 @@ pub struct LocalFile {
     data_descriptor: Option<DataDescriptor>,
 }
 
+/// Data descriptor
 #[derive(BinRead, Debug)]
 pub struct DataDescriptor {
     crc32: u32,
@@ -47,6 +51,7 @@ pub struct DataDescriptor {
     uncompressed_size: u32,
 }
 
+/// Central directory file header
 #[derive(BinRead, Debug)]
 #[br(magic = b"\x50\x4b\x01\x02")]
 pub struct CentralDirectoryFileHeader {
@@ -77,6 +82,7 @@ pub struct CentralDirectoryFileHeader {
     file_comment: Vec<u8>,
 }
 
+/// End of central directory record
 #[derive(BinRead, Debug)]
 #[br(magic = b"\x50\x4b\x05\x06")]
 pub struct EndOfCentralDirectoryRecord {

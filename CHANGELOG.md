@@ -10,3 +10,7 @@
 
 * Split lib into multiple modules
 
+## 0.2.2
+
+* Add API documentation and doctests
+

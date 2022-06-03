@@ -1,5 +1,6 @@
 use crate::*;
 
+/// Struct API
 #[derive(Debug)]
 pub struct Zip {
     path: Option<PathBuf>,
